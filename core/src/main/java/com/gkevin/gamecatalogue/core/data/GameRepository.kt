@@ -13,8 +13,8 @@ class GameRepository(
     private val localRepository: LocalDataSource
     ): IGameRepository {
 
-    override fun getTopGame(): Flowable<List<Game>> {
-        return remoteRepository.getTopGame().map { DataMapper.mapResponseToModel(it) }
+    override fun getTopGame(platform: String): Flowable<List<Game>> {
+        return remoteRepository.getTopGame(platform).map { DataMapper.mapResponseToModel(it) }
     }
 
     override fun getDlcGame(id: Int): Flowable<List<Game>> {
@@ -23,10 +23,6 @@ class GameRepository(
 
     override fun getGameDetail(id: Int): Flowable<GameDetail> {
         return remoteRepository.getGameDetail(id).map { DataMapper.mapResponseDetailToModel(it) }
-    }
-
-    override fun getGameWithPlatform(platform: Int): Flowable<List<Game>> {
-        return remoteRepository.getGameWithPlatform(platform).map { DataMapper.mapResponseToModel(it) }
     }
 
     override fun insertFavGame(game: Game) {

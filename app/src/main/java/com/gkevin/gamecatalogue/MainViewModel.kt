@@ -1,21 +1,22 @@
 package com.gkevin.gamecatalogue
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
+import com.gkevin.gamecatalogue.core.domain.model.Game
 import com.gkevin.gamecatalogue.core.domain.usecase.GameUseCase
 
 class MainViewModel(private val gameUseCase: GameUseCase): ViewModel() {
-    val arrayGame = LiveDataReactiveStreams.fromPublisher(gameUseCase.getTopGame())
 
-    val favGame = LiveDataReactiveStreams.fromPublisher(gameUseCase.getFavGame())
-
-    val arrayGameXboxOne = LiveDataReactiveStreams.fromPublisher(gameUseCase.getGameWithPlatform(
-        XBOXONE))
+    fun getGames(platform: String = PC): LiveData<List<Game>> {
+        return LiveDataReactiveStreams.fromPublisher(gameUseCase.getTopGame(platform))
+    }
+//    val arrayGame = LiveDataReactiveStreams.fromPublisher(gameUseCase.getTopGame(PC))
 
     companion object {
-        private const val XBOXONE = 1
-        private const val PC = 4
-        private const val PS4 = 18
-        private const val NSWITCH = 7
+        const val XBOXONE = "1"
+        const val PC = "4"
+        const val PS4 = "18"
+        const val NSWITCH = "7"
     }
 }

@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val appBar = AppBarConfiguration.Builder(
-//            R.id.homeFragment
-//        ).build()
-//        val controller = findNavController(R.id.host_fragment)
-//        setupActionBarWithNavController(controller, appBar)
-//        binding.bottomNavigationView.setupWithNavController(controller)
+        val appBar = AppBarConfiguration.Builder(
+            R.id.homeFragment, R.id.xboxXFragment
+        ).build()
+        val controller = findNavController(R.id.host_fragment)
+        setupActionBarWithNavController(controller, appBar)
+        binding.bottomNavigationView.setupWithNavController(controller)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

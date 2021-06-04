@@ -11,6 +11,7 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("games")
     fun getListGames(
+        @Query("platforms") platforms: String,
         @Query("key") key: String = "5053d9a247c343709b7a015cb113bdca"
     ): Flowable<ArrayGameResponse>
 
@@ -25,11 +26,5 @@ interface ApiService {
         @Path("id") id: Int,
         @Query("key") key: String = "5053d9a247c343709b7a015cb113bdca"
     ): Flowable<GameDetailResponse>
-
-    @GET("games")
-    fun getGameWithPlatform(
-        @Query("platforms") platforms: Int,
-        @Query("key") key: String = "5053d9a247c343709b7a015cb113bdca"
-    ): Flowable<ArrayGameResponse>
 
 }

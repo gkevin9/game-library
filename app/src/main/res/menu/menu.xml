@@ -5,4 +5,9 @@
         android:id="@+id/homeFragment"
         android:title="@string/home"
         android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/xboxXFragment"
+        android:title="@string/xbox"
+        android:icon="@drawable/xbox_logo"/>
+
 </menu>
