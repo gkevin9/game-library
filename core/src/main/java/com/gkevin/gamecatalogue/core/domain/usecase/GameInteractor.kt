@@ -18,6 +18,10 @@ class GameInteractor(private val gameRepository: IGameRepository): GameUseCase {
         return gameRepository.getGameDetail(id)
     }
 
+    override fun getGameWithPlatform(platform: Int): Flowable<List<Game>> {
+        return gameRepository.getGameWithPlatform(platform)
+    }
+
     override fun insertFavGame(game: Game) {
         gameRepository.insertFavGame(game)
     }

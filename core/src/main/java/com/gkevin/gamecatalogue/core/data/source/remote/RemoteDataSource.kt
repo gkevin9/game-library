@@ -61,6 +61,23 @@ class RemoteDataSource(private val apiService: ApiService) {
         return result.toFlowable(BackpressureStrategy.BUFFER)
     }
 
+    fun getGameWithPlatform(platform: Int): Flowable<List<GameResponse>> {
+        val result = PublishSubject.create<List<GameResponse>>()
+
+        val client = apiService.getGameWithPlatform(platforms = platform)
+        client.subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                val games = it.results
+                result.onNext(games)
+            }, {
+                Log.e(TAG, it.toString())
+            })
+
+        return result.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
     companion object {
         private const val TAG = "RemoteDataSource"
     }

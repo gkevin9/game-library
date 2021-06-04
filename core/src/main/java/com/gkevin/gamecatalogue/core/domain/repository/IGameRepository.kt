@@ -8,6 +8,7 @@ interface IGameRepository {
     fun getTopGame(): Flowable<List<Game>>
     fun getDlcGame(id: Int): Flowable<List<Game>>
     fun getGameDetail(id: Int): Flowable<GameDetail>
+    fun getGameWithPlatform(platform: Int): Flowable<List<Game>>
 
     fun insertFavGame(game: Game)
     fun deleteFavGame(game: Game)

@@ -25,6 +25,10 @@ class GameRepository(
         return remoteRepository.getGameDetail(id).map { DataMapper.mapResponseDetailToModel(it) }
     }
 
+    override fun getGameWithPlatform(platform: Int): Flowable<List<Game>> {
+        return remoteRepository.getGameWithPlatform(platform).map { DataMapper.mapResponseToModel(it) }
+    }
+
     override fun insertFavGame(game: Game) {
         localRepository.insertFavGame(game)
     }
@@ -36,4 +40,5 @@ class GameRepository(
     override fun getFavGame(): Flowable<List<Game>> {
         return localRepository.getFavGame().map { DataMapper.mapEntityToModel(it) }
     }
+
 }

@@ -26,4 +26,10 @@ interface ApiService {
         @Query("key") key: String = "5053d9a247c343709b7a015cb113bdca"
     ): Flowable<GameDetailResponse>
 
+    @GET("games")
+    fun getGameWithPlatform(
+        @Query("platforms") platforms: Int,
+        @Query("key") key: String = "5053d9a247c343709b7a015cb113bdca"
+    ): Flowable<ArrayGameResponse>
+
 }

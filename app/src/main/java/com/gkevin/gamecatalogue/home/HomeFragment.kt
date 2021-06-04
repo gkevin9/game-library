@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -43,6 +43,10 @@ class HomeFragment : Fragment() {
 
         viewModel.arrayGame.observe(requireActivity(), {
             adapter.setItem(it)
+        })
+
+        viewModel.arrayGameXboxOne.observe(requireActivity(), {
+            Log.i("AAAAA", it[0].name.toString())
         })
     }
 
