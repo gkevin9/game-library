@@ -2,28 +2,31 @@ package com.gkevin.gamecatalogue.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
 import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gkevin.gamecatalogue.MainViewModel
-import com.gkevin.gamecatalogue.R
 import com.gkevin.gamecatalogue.core.ui.GameAdapter
-import com.gkevin.gamecatalogue.databinding.FragmentXboxXBinding
+import com.gkevin.gamecatalogue.databinding.FragmentPsBinding
 import com.gkevin.gamecatalogue.detail.DetailActivity
 import com.gkevin.gamecatalogue.util.Util
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class XboxXFragment : Fragment() {
+class PsFragment : Fragment() {
 
-    private lateinit var binding: FragmentXboxXBinding
-    private val viewModel: MainViewModel by sharedViewModel()
+    private lateinit var binding: FragmentPsBinding
     private lateinit var adapter: GameAdapter
+    val viewModel: MainViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentXboxXBinding.inflate(layoutInflater, container, false)
+        // Inflate the layout for this fragment
+        binding = FragmentPsBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -35,10 +38,10 @@ class XboxXFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.rvXbox.layoutManager = GridLayoutManager(requireContext(), Util.calculateNoOfColumns(requireContext(), 200f))
-        binding.rvXbox.adapter = adapter
+        binding.rvPs.layoutManager = GridLayoutManager(requireContext(), Util.calculateNoOfColumns(requireContext(), 200f))
+        binding.rvPs.adapter = adapter
 
-        viewModel.getGames(MainViewModel.XBOXONE).observe(requireActivity(), {
+        viewModel.getGames(MainViewModel.PS4).observe(requireActivity(), {
             adapter.setItem(it)
         })
     }

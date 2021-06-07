@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val appBar = AppBarConfiguration.Builder(
-            R.id.homeFragment, R.id.xboxXFragment
+            R.id.homeFragment, R.id.xboxXFragment, R.id.psFragment, R.id.nintendoFragment
         ).build()
         val controller = findNavController(R.id.host_fragment)
         setupActionBarWithNavController(controller, appBar)

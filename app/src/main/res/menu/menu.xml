@@ -3,11 +3,19 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:title="@string/home"
-        android:icon="@drawable/ic_home"/>
+        android:title="@string/pc"
+        android:icon="@drawable/windows_logo"/>
     <item
         android:id="@+id/xboxXFragment"
         android:title="@string/xbox"
         android:icon="@drawable/xbox_logo"/>
+    <item
+        android:id="@+id/psFragment"
+        android:title="@string/ps"
+        android:icon="@drawable/ps_icon"/>
+    <item
+        android:id="@+id/nintendoFragment"
+        android:title="@string/nswitch"
+        android:icon="@drawable/nintendo_icon"/>
 
 </menu>

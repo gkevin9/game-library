@@ -7,4 +7,8 @@
     <string name="title_favorite">Favorite</string>
     <string name="about">About</string>
     <string name="xbox">Xbox</string>
+    <string name="pc">Pc</string>
+    <string name="ps">Ps</string>
+    <string name="playstation">Playstation</string>
+    <string name="nswitch">Switch</string>
 </resources>
