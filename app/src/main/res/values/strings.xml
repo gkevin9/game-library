@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Game Catalogue</string>
-    <string name="home">Home</string>
     <string name="favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_favorite">Favorite</string>
     <string name="about">About</string>
     <string name="xbox">Xbox</string>
@@ -11,4 +8,5 @@
     <string name="ps">Ps</string>
     <string name="playstation">Playstation</string>
     <string name="nswitch">Switch</string>
+    <string name="image">image</string>
 </resources>

@@ -13,7 +13,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@color/cardview_dark_background" />
+        tools:srcCompat="@color/cardview_dark_background"
+        android:contentDescription="@string/image"/>
 
     <TextView
         android:id="@+id/txtTitle"
@@ -96,7 +97,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/txtRating"
         app:layout_constraintEnd_toStartOf="@+id/txtRating"
         app:layout_constraintTop_toTopOf="@+id/txtRating"
-        app:srcCompat="@drawable/ic_star_rate" />
+        app:srcCompat="@drawable/ic_star_rate"
+        android:contentDescription="@string/image"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
