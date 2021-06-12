@@ -2,12 +2,10 @@ package com.gkevin.gamecatalogue.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gkevin.gamecatalogue.MainViewModel
-import com.gkevin.gamecatalogue.R
 import com.gkevin.gamecatalogue.core.ui.GameAdapter
 import com.gkevin.gamecatalogue.databinding.FragmentPcBinding
 import com.gkevin.gamecatalogue.detail.DetailActivity
@@ -43,6 +41,7 @@ class PcFragment : Fragment() {
         binding.rvHome.adapter = adapter
 
         viewModel.getGames().observe(requireActivity(), {
+            binding.rvHome.visibility = View.VISIBLE
             adapter.setItem(it)
         })
 
