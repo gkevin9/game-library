@@ -12,12 +12,13 @@ import com.gkevin.gamecatalogue.favorite.di.favModule
 import com.gkevin.gamecatalogue.util.Util
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoriteBinding
     private lateinit var adapter: GameAdapter
-    val viewModel: FavoriteDynamicViewModel by viewModel()
+    private val viewModel: FavoriteDynamicViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,5 +41,10 @@ class FavoriteActivity : AppCompatActivity() {
         viewModel.favGame.observe(this, {
             adapter.setItem(it)
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unloadKoinModules(favModule)
     }
 }
