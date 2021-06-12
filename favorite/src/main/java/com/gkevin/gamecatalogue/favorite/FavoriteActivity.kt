@@ -3,6 +3,7 @@ package com.gkevin.gamecatalogue.favorite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gkevin.gamecatalogue.R
 import com.gkevin.gamecatalogue.core.ui.GameAdapter
@@ -39,6 +40,7 @@ class FavoriteActivity : AppCompatActivity() {
         binding.rvFavDynamicFeature.adapter = adapter
 
         viewModel.favGame.observe(this, {
+            binding.rvFavDynamicFeature.visibility = View.VISIBLE
             adapter.setItem(it)
         })
     }
