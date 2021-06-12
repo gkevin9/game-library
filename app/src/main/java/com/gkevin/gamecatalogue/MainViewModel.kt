@@ -9,8 +9,8 @@ import com.gkevin.gamecatalogue.core.domain.usecase.GameUseCase
 
 class MainViewModel(private val gameUseCase: GameUseCase): ViewModel() {
 
-    fun getGames(platform: String = PC): LiveData<List<Game>> {
-        return LiveDataReactiveStreams.fromPublisher(gameUseCase.getTopGame(platform))
+    fun getGames(platform: String = PC, ordering: String = ORDERING_RATING_ASC): LiveData<List<Game>> {
+        return LiveDataReactiveStreams.fromPublisher(gameUseCase.getTopGame(platform, ordering))
     }
 
     companion object {
@@ -18,5 +18,9 @@ class MainViewModel(private val gameUseCase: GameUseCase): ViewModel() {
         const val PC = "4"
         const val PS4 = "18"
         const val NSWITCH = "7"
+
+        const val ORDERING_RELEASED = "released"
+        const val ORDERING_NAME = "name"
+        const val ORDERING_RATING_ASC = "-rating"
     }
 }

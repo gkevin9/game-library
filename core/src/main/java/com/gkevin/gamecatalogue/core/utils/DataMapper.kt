@@ -13,7 +13,7 @@ object DataMapper {
             val game = Game(
                 id = it.id,
                 name = it.name,
-                released = it.released,
+                released = it.released?: "",
                 background_image = it.background_image,
                 rating = it.rating
             )

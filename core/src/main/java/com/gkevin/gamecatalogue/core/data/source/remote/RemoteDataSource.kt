@@ -11,10 +11,10 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
 class RemoteDataSource(private val apiService: ApiService) {
-    fun getTopGame(platform: String): Flowable<List<GameResponse>> {
+    fun getTopGame(platform: String, ordering: String): Flowable<List<GameResponse>> {
         val result = PublishSubject.create<List<GameResponse>>()
 
-        val client = apiService.getListGames(platform)
+        val client = apiService.getListGames(platform, ordering)
         client.subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .take(1)
