@@ -16,7 +16,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NintendoFragment : Fragment() {
 
-    private lateinit var binding: FragmentNintendoBinding
+    private var _binding: FragmentNintendoBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var adapter: GameAdapter
     val viewModel: MainViewModel by sharedViewModel()
 
@@ -24,7 +26,7 @@ class NintendoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNintendoBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentNintendoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -42,6 +44,11 @@ class NintendoFragment : Fragment() {
         viewModel.getGames(MainViewModel.NSWITCH).observe(requireActivity(), {
             adapter.setItem(it)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

@@ -17,7 +17,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PsFragment : Fragment() {
 
-    private lateinit var binding: FragmentPsBinding
+    private var _binding: FragmentPsBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var adapter: GameAdapter
     val viewModel: MainViewModel by sharedViewModel()
 
@@ -26,7 +28,7 @@ class PsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentPsBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentPsBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -44,6 +46,11 @@ class PsFragment : Fragment() {
         viewModel.getGames(MainViewModel.PS4).observe(requireActivity(), {
             adapter.setItem(it)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

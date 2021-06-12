@@ -15,7 +15,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class XboxXFragment : Fragment() {
 
-    private lateinit var binding: FragmentXboxXBinding
+    private var _binding: FragmentXboxXBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: MainViewModel by sharedViewModel()
     private lateinit var adapter: GameAdapter
 
@@ -23,7 +25,7 @@ class XboxXFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentXboxXBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentXboxXBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -41,6 +43,11 @@ class XboxXFragment : Fragment() {
         viewModel.getGames(MainViewModel.XBOXONE).observe(requireActivity(), {
             adapter.setItem(it)
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
