@@ -6,12 +6,6 @@ data class ArrayGameResponse(
     @field:SerializedName("count")
     val count: Int,
 
-    @field:SerializedName("next")
-    val next: String?,
-
-    @field:SerializedName("previous")
-    val previous: String?,
-
     @field:SerializedName("results")
     val results: ArrayList<GameResponse>
 )
