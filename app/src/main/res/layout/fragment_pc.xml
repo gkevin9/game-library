@@ -31,7 +31,6 @@
                 <include layout="@layout/rv_list_game_placeholder"/>
                 <include layout="@layout/rv_list_game_placeholder"/>
                 <include layout="@layout/rv_list_game_placeholder"/>
-                <include layout="@layout/rv_list_game_placeholder"/>
 
             </LinearLayout>
 

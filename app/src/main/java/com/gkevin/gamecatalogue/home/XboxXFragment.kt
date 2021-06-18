@@ -60,6 +60,7 @@ class XboxXFragment : Fragment() {
 
     private fun loadGame() {
         viewModel.getGames(MainViewModel.XBOXONE, page = gamePage).observe(requireActivity(), {
+            binding.rvXbox.visibility = View.VISIBLE
             adapter.setItem(it)
         })
     }

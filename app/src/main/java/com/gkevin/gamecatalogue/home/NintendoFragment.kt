@@ -61,6 +61,7 @@ class NintendoFragment : Fragment() {
 
     private fun loadGame() {
         viewModel.getGames(MainViewModel.NSWITCH, page = gamePage).observe(requireActivity(), {
+            binding.rvNintendo.visibility = View.VISIBLE
             adapter.setItem(it)
         })
     }
