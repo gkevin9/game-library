@@ -14,7 +14,7 @@ object DataMapper {
                 id = it.id,
                 name = it.name,
                 released = it.released?: "",
-                background_image = it.background_image,
+                background_image = it.background_image?: "",
                 rating = it.rating
             )
             result.add(game)

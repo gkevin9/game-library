@@ -20,10 +20,12 @@ class GameDlcAdapter(val clickCallback: (Game) -> Unit): RecyclerView.Adapter<Ga
 
     class GameHolder(private val binding: RvListDlcBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Game) {
-            Glide.with(itemView.context)
-                .load(item.background_image)
-                .centerCrop()
-                .into(binding.imgPoster)
+            if (item.background_image != "") {
+                Glide.with(itemView.context)
+                    .load(item.background_image)
+                    .centerCrop()
+                    .into(binding.imgPoster)
+            }
             binding.txtTitleDlc.text = item.name
         }
     }
