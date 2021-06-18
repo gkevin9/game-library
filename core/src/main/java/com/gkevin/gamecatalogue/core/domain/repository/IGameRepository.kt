@@ -5,7 +5,7 @@ import com.gkevin.gamecatalogue.core.domain.model.GameDetail
 import io.reactivex.Flowable
 
 interface IGameRepository {
-    fun getTopGame(platform: String, ordering: String): Flowable<List<Game>>
+    fun getTopGame(platform: String, ordering: String, page: Int): Flowable<List<Game>>
     fun getDlcGame(id: Int): Flowable<List<Game>>
     fun getGameDetail(id: Int): Flowable<GameDetail>
 

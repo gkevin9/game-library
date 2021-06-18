@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gkevin.gamecatalogue.MainViewModel
 import com.gkevin.gamecatalogue.R
 import com.gkevin.gamecatalogue.core.ui.GameAdapter
@@ -20,6 +22,8 @@ class XboxXFragment : Fragment() {
 
     private val viewModel: MainViewModel by sharedViewModel()
     private lateinit var adapter: GameAdapter
+
+    private var gamePage = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +41,25 @@ class XboxXFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.rvXbox.layoutManager = GridLayoutManager(requireContext(), Util.calculateNoOfColumns(requireContext(), 200f))
+        binding.rvXbox.layoutManager = LinearLayoutManager(requireContext())
         binding.rvXbox.adapter = adapter
 
-        viewModel.getGames(MainViewModel.XBOXONE).observe(requireActivity(), {
+        binding.rvXbox.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    gamePage += 1
+                    loadGame()
+                }
+            }
+        })
+
+        loadGame()
+    }
+
+    private fun loadGame() {
+        viewModel.getGames(MainViewModel.XBOXONE, page = gamePage).observe(requireActivity(), {
             adapter.setItem(it)
         })
     }

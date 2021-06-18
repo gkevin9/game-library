@@ -6,8 +6,8 @@ import com.gkevin.gamecatalogue.core.domain.repository.IGameRepository
 import io.reactivex.Flowable
 
 class GameInteractor(private val gameRepository: IGameRepository): GameUseCase {
-    override fun getTopGame(platform: String, ordering: String): Flowable<List<Game>> {
-        return gameRepository.getTopGame(platform, ordering)
+    override fun getTopGame(platform: String, ordering: String, page: Int): Flowable<List<Game>> {
+        return gameRepository.getTopGame(platform, ordering, page)
     }
 
     override fun getDlcGame(id: Int): Flowable<List<Game>> {

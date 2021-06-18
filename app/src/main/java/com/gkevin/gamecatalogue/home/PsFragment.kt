@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gkevin.gamecatalogue.MainViewModel
 import com.gkevin.gamecatalogue.core.ui.GameAdapter
 import com.gkevin.gamecatalogue.databinding.FragmentPsBinding
 import com.gkevin.gamecatalogue.detail.DetailActivity
-import com.gkevin.gamecatalogue.util.Util
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PsFragment : Fragment() {
 
@@ -22,6 +21,8 @@ class PsFragment : Fragment() {
 
     private lateinit var adapter: GameAdapter
     val viewModel: MainViewModel by sharedViewModel()
+
+    private var gamePage = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +41,26 @@ class PsFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.rvPs.layoutManager = GridLayoutManager(requireContext(), Util.calculateNoOfColumns(requireContext(), 200f))
+        binding.rvPs.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPs.adapter = adapter
 
-        viewModel.getGames(MainViewModel.PS4).observe(requireActivity(), {
+        binding.rvPs.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    gamePage += 1
+                    loadGame()
+                }
+            }
+        })
+
+        loadGame()
+    }
+
+    private fun loadGame() {
+        viewModel.getGames(platform = MainViewModel.PS4 , page = gamePage).observe(requireActivity(), {
+            binding.rvPs.visibility = View.VISIBLE
             adapter.setItem(it)
         })
     }

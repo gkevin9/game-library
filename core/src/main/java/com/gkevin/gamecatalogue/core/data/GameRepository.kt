@@ -13,8 +13,8 @@ class GameRepository(
     private val localRepository: LocalDataSource
     ): IGameRepository {
 
-    override fun getTopGame(platform: String, ordering: String): Flowable<List<Game>> {
-        return remoteRepository.getTopGame(platform, ordering).map { DataMapper.mapResponseToModel(it) }
+    override fun getTopGame(platform: String, ordering: String, page: Int): Flowable<List<Game>> {
+        return remoteRepository.getTopGame(platform, ordering, page).map { DataMapper.mapResponseToModel(it) }
     }
 
     override fun getDlcGame(id: Int): Flowable<List<Game>> {

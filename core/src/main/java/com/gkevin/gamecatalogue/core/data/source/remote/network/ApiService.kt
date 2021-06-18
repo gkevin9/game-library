@@ -13,6 +13,7 @@ interface ApiService {
     fun getListGames(
         @Query("platforms") platforms: String,
         @Query("ordering") ordering: String,
+        @Query("page") page: Int,
         @Query("key") key: String = "5053d9a247c343709b7a015cb113bdca"
     ): Flowable<ArrayGameResponse>
 

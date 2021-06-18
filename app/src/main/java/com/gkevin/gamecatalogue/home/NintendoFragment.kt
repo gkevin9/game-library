@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gkevin.gamecatalogue.MainViewModel
 import com.gkevin.gamecatalogue.core.ui.GameAdapter
 import com.gkevin.gamecatalogue.databinding.FragmentNintendoBinding
@@ -21,6 +23,8 @@ class NintendoFragment : Fragment() {
 
     private lateinit var adapter: GameAdapter
     val viewModel: MainViewModel by sharedViewModel()
+
+    private var gamePage = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +42,25 @@ class NintendoFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.rvNintendo.layoutManager = GridLayoutManager(requireContext(), Util.calculateNoOfColumns(requireContext(), 200f))
+        binding.rvNintendo.layoutManager = LinearLayoutManager(requireContext())
         binding.rvNintendo.adapter = adapter
 
-        viewModel.getGames(MainViewModel.NSWITCH).observe(requireActivity(), {
+        binding.rvNintendo.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    gamePage += 1
+                    loadGame()
+                }
+            }
+        })
+
+        loadGame()
+    }
+
+    private fun loadGame() {
+        viewModel.getGames(MainViewModel.NSWITCH, page = gamePage).observe(requireActivity(), {
             adapter.setItem(it)
         })
     }
